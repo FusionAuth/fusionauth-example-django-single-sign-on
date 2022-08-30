@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-kx+#*c*mmv2flct-(hjr=5x!ejf*-a9b8%i4y9_kt0owz1=h4(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,7 +49,6 @@ OIDC_RP_CLIENT_ID = '495c1841-4518-4f72-8d8c-0a4f6c0a31f6'
 OIDC_RP_CLIENT_SECRET = '0PmWxVSzu0zWLfa302qWDZaPBlq2GuuRJ8QTOBF8Og4'
 
 OIDC_OP_AUTHORIZATION_ENDPOINT = "http://localhost:9011/oauth2/authorize"
-#OIDC_OP_AUTHORIZATION_ENDPOINT = "http://localhost:9011/oauth2/authorize?client_id=495c1841-4518-4f72-8d8c-0a4f6c0a31f6&redirect_uri=http://host.docker.internal:8000/django_sso_app/&response_type=code&tenantId=48640354-5354-f24e-e75d-9b9ff957a666"
 OIDC_OP_TOKEN_ENDPOINT = "http://localhost:9011/oauth2/token"
 OIDC_OP_USER_ENDPOINT = "http://localhost:9011/oauth2/userinfo"
 
@@ -58,9 +57,8 @@ OIDC_RP_SCOPES = "openid profile email"
 #OIDC_RP_SIGN_ALGO = "RS256"
 OIDC_OP_JWKS_ENDPOINT = "http://localhost:9011/.well-known/jwks.json"
 
-#OIDC_AUTHENTICATION_CALLBACK_URL = "django_sso_app/"
 LOGIN_REDIRECT_URL = "http://localhost:8000/django_sso_app/"
-#LOGOUT_REDIRECT_URL = "http://localhost:8000/django_sso_app/"
+LOGOUT_REDIRECT_URL = "http://localhost:8000/django_sso_app/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
