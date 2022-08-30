@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django SSO App</title>
+</head>
+<body>
+<div>
+    {% if user.is_authenticated %}
+    <p>Current user: ❴❴ user.email ❵❵</p>
+    <!--form action="{% url 'oidc_logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form-->
+    {% else %}
+    <a href="{% url 'oidc_authentication_init' %}">Login</a>
+    {% endif %}
+</div>
+</body>
+</html>

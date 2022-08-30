@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - db_net
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    container_name: search
+    environment:
+      cluster.name: fusionauth
+      bootstrap.memory_lock: "true"
+      discovery.type: single-node
+      ES_JAVA_OPTS: ${ES_JAVA_OPTS}
+    healthcheck:
+      test: [ "CMD", "curl",  "--fail" ,"--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://localhost:9200/" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - search_net
+    restart: unless-stopped
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - search_data:/usr/share/elasticsearch/data
+
+networks:
+  db_net:
+    driver: bridge
+  search_net:
+    driver: bridge
+
+volumes:
+  db_data:
+  search_data:
