@@ -44,9 +44,9 @@ AUTHENTICATION_BACKENDS = (
     'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
 )
 
-# The below config is taken from fusionauth application
-OIDC_RP_CLIENT_ID = '495c1841-4518-4f72-8d8c-0a4f6c0a31f6'
-OIDC_RP_CLIENT_SECRET = '0PmWxVSzu0zWLfa302qWDZaPBlq2GuuRJ8QTOBF8Og4'
+# The below config is taken from fusionauth admin UI when you set up the Django application in it
+OIDC_RP_CLIENT_ID = 'YOUR CLIENT ID'
+OIDC_RP_CLIENT_SECRET = 'YOUR CLIENT SECRET'
 
 OIDC_OP_AUTHORIZATION_ENDPOINT = "http://localhost:9011/oauth2/authorize"
 OIDC_OP_TOKEN_ENDPOINT = "http://localhost:9011/oauth2/token"
